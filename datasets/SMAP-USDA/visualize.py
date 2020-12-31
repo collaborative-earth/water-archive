@@ -32,12 +32,23 @@ def legend(
         minimum: float=0,
         maximum: float=1):
     pal_len = len(palette)
-    legend = figure(title=title, plot_width=plot_width, plot_height=plot_height)  
+    pal_dist = maximum - minimum
+    width_color = pal_dist/pal_len
+    x_locs = [minimum + .5 * width_color * ((2 * ii) - 1)
+              for ii in range(pal_len+1) if ii != 0]
+    # print(width_color)
+    # print(x_locs)
+
+    legend = figure(
+        title=title, 
+        plot_width=plot_width, 
+        plot_height=plot_height)
+    
     _ =legend.vbar(
-        x = range(pal_len),  
-        top = [1] * pal_len, 
-        bottom = [0] * pal_len, 
-        width = (maximum-minimum)/pal_len, 
+        x = x_locs,  
+        top = [0] * pal_len, 
+        bottom = [1] * pal_len, 
+        width = width_color, 
         color = palette) 
     show(legend)
     return None
