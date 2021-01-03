@@ -1,6 +1,19 @@
 import ee
 
 
+def months_list():
+    month_numbers = [ii+1 for ii in range(12)]
+    return ee.List(month_numbers)
+
+
+def months_dict():
+    month_numbers = [ii+1 for ii in range(12)]
+    month_names = [
+        '01_Jan', '02_Feb', '03_Mar', '04_Apr', '05_May', '06_Jun', 
+        '07_Jul', '08_Aug', '09_Sep', '10_Oct', '11_Nov', '12_Dec']
+    return ee.Dictionary(dict(zip(month_names, month_numbers)))
+
+
 # monthly averages for each band
 def bands_avgs(bands, img_col):
     # Iterands
@@ -10,13 +23,8 @@ def bands_avgs(bands, img_col):
     # information is encoded in the object anyway, but do it 
     # that way for consistency. Use values() to recover a list.
     # The default sorting by key is annoying
-    month_numbers = [ii+1 for ii in range(12)]
-    month_names = [
-        '01_Jan', '02_Feb', '03_Mar', '04_Apr', '05_May', '06_Jun', 
-        '07_Jul', '08_Aug', '09_Sep', '10_Oct', '11_Nov', '12_Dec']
-    ee_months = ee.Dictionary(dict(zip(month_names, month_numbers)))
     # ee_months = ee.List.sequence(1, 12)
-
+    ee_months = months_dict()
     
     # Iterators
     # Monthly averages
