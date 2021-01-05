@@ -1,16 +1,17 @@
 import ee
 
+month_numbers = [ii+1 for ii in range(12)]
+## ee dictionaries are sorted, so this motivates the leading 2digit number
+month_names = [
+        '01_Jan', '02_Feb', '03_Mar', '04_Apr', '05_May', '06_Jun', 
+        '07_Jul', '08_Aug', '09_Sep', '10_Oct', '11_Nov', '12_Dec']
 
-def months_list():
-    month_numbers = [ii+1 for ii in range(12)]
+
+def months_list():    
     return ee.List(month_numbers)
 
 
 def months_dict():
-    month_numbers = [ii+1 for ii in range(12)]
-    month_names = [
-        '01_Jan', '02_Feb', '03_Mar', '04_Apr', '05_May', '06_Jun', 
-        '07_Jul', '08_Aug', '09_Sep', '10_Oct', '11_Nov', '12_Dec']
     return ee.Dictionary(dict(zip(month_names, month_numbers)))
 
 
