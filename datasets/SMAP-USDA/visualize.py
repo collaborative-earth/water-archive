@@ -3,10 +3,10 @@ from bokeh.plotting import figure, output_file, show
 from bokeh.palettes import brewer, colorblind
 import ee
 import folium
+from water_common import bboxes
 from IPython.display import Image
 
-output_notebook()
-
+_ = output_notebook()
 
 # Define a method for displaying Earth Engine image tiles to folium map.
 def add_ee_layer(self, ee_image_object, vis_params, name):
@@ -64,3 +64,43 @@ def folium_display(the_map):
     the_map.add_child(folium.LayerControl())
     display(the_map)
     return None
+
+
+def img_range(
+        img,
+        area_of_interest=None,
+        scale_m: int=1):
+
+    if area_of_interest is None:
+        area_of_interest = bboxes()['world']
+
+    min = (img
+           .reduceRegion(
+               ee.Reducer.min(), area_of_interest, bestEffort=True, scale=scale_m)
+           .values().getInfo())
+    max = (img
+           .reduceRegion(
+               ee.Reducer.max(), area_of_interest, bestEffort=True, scale=scale_m)
+           .values().getInfo())
+
+    # probably not the best way to handle this
+    if len(min) > 1 or len(max) > 1:
+        raise ValueError('Passed image has multiple bands')
+        
+    return [min[0], max[0]]
+
+
+def img_col_range(
+        img_col,
+        area_of_interest=None,
+        scale_m: int=1):
+
+    if area_of_interest is None:
+        area_of_interest = bboxes()['world']
+
+    min = img_range(img_col.min(), area_of_interest)[0]
+    max = img_range(img_col.max(), area_of_interest)[1]
+
+    return [min, max]
+
+
