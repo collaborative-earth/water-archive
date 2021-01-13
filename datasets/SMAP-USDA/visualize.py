@@ -69,18 +69,18 @@ def folium_display(the_map):
 def img_range(
         img,
         area_of_interest=None,
-        scale_m: int=.1):
+        scale_m: int=1):
 
     if area_of_interest is None:
         area_of_interest = bboxes()['world']
 
     min = (img
            .reduceRegion(
-               ee.Reducer.min(), area_of_interest, bestEffort=True)
+               ee.Reducer.min(), area_of_interest, bestEffort=True, scale=scale_m)
            .values().getInfo())
     max = (img
            .reduceRegion(
-               ee.Reducer.max(), area_of_interest, bestEffort=True)
+               ee.Reducer.max(), area_of_interest, bestEffort=True, scale=scale_m)
            .values().getInfo())
 
     # probably not the best way to handle this
@@ -93,13 +93,13 @@ def img_range(
 def img_col_range(
         img_col,
         area_of_interest=None,
-        scale_m: int=.1):
+        scale_m: int=1):
 
     if area_of_interest is None:
         area_of_interest = bboxes()['world']
 
-    min = img_range(img_col.min(), area_of_interest, scale_m)[0]
-    max = img_range(img_col.max(), area_of_interest, scale_m)[1]
+    min = img_range(img_col.min(), area_of_interest)[0]
+    max = img_range(img_col.max(), area_of_interest)[1]
 
     return [min, max]
 
