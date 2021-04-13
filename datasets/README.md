@@ -5,7 +5,7 @@
 https://code.earthengine.google.com/?asset=users/jamesmcc/smap_usda_climatology
 
 
-## USDA Soil Type Available Water Capacity (OpenLandMap_SoilType)
+## USDA Soil Type Available Water Capacity (OpenLandMap_SoilType/)
 https://code.earthengine.google.com/?asset=users/joshdanielearthengine/usda_soil_type
 
 
