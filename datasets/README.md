@@ -5,6 +5,10 @@
 https://code.earthengine.google.com/?asset=users/jamesmcc/smap_usda_climatology
 
 
+## USDA Soil Type Available Water Capacity (OpenLandMap_SoilType/)
+https://code.earthengine.google.com/?asset=users/joshdanielearthengine/usda_soil_type
+
+
 ## ERA 5 Runoff Climatologies (era5_merit/)
 https://code.earthengine.google.com/?asset=users/jamesmcc/era5_merit_potential_sfc_runoff_conus_climatology
 https://code.earthengine.google.com/?asset=users/jamesmcc/era5_merit_potential_sfc_runoff_neom_climatology
